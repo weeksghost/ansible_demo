@@ -1,0 +1,36 @@
+---
+
+- name: Install MySQL
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
+  with_items:
+    - mysql-server
+    - libmysqlclient-dev
+  tags: packages
+
+- name: Install MySQL Python Packages
+  pip: name={{ item }} state=latest
+  with_items:
+    - MySQL-python
+
+- name: Ensure the MySQL service is running
+  service: name=mysql state=started enabled=yes
+
+# TODO: Change root password and pair it with a variable
+
+- name: Ensure database is created
+  mysql_db: db={{ db_name }}
+            state=present
+            login_user=root
+            login_password=
+
+- name: Ensure user has access to the database
+  mysql_user: name=root
+              login_user=root
+              login_password=
+              host={{ item }}
+              password=
+              priv=*.*:ALL,GRANT
+              state=present
+  with_items:
+    - localhost
+    - 127.0.0.1

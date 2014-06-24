@@ -1,0 +1,33 @@
+---
+
+# Application settings.
+virtualenv_path: "{{ application_name }}"
+project_path: "{{ application_name }}"
+application_path: "{{ application_name }}/{{ application_name }}"
+
+application_log_dir: "/var/log/nginx/"
+application_log_file: "/var/log/supervisor/{{ application_name }}.log"
+application_err_file: "/var/log/supervisor/{{ application_name }}_err.log"
+
+#requirements_file: "{{ project_path }}/requirements.txt"
+#settings_root: "{{ application_path }}/settings/"
+#settings_path: "{{ application_path }}/settings/example/"
+
+
+# Gunicorn settings
+gunicorn_user: "{{ application_name }}"
+gunicorn_group: webapps
+
+# Static & Media Settings
+serving_user: "{{ application_name }}"
+serving_group: www-data
+
+
+# Nginx settings
+nginx_http_port: 80
+nginx_https_port: 443
+nginx_access_log_file: "{{ application_log_dir }}/nginx_access.log"
+nginx_error_log_file: "{{ application_log_dir }}/nginx_error.log"
+
+nginx_static_dir: "{{ virtualenv_path }}/static/"
+nginx_media_dir: "{{ virtualenv_path }}/media/"

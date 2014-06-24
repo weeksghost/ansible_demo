@@ -1,0 +1,52 @@
+---
+
+- name: Ubuntu dist upgrade
+  apt: upgrade=dist
+
+- name: Ensure OpenSSl and libssl are the latest versions
+  apt: name={{ item }} update_cache={{ update_apt_cache }} state=latest
+  with_items:
+    - openssl
+    - libssl-dev
+    - libssl-doc
+  tags: packages
+
+- name: Install base packages
+  apt: name={{ item }} update_cache={{ update_apt_cache }} force=yes state=installed
+  with_items:
+    - build-essential
+    - git
+    - ntp
+    - sqlite3
+    - unzip
+    - python-dev
+    - python-pip
+    - python-pycurl
+    - supervisor
+    - libfreetype6-dev
+    - libjpeg8-dev
+    - liblcms1-dev
+    - libpng12-dev
+    - zlib1g-dev
+    - libmemcached-dev
+    - libsqlite3-dev
+    - libev-dev
+    - libevent-dev
+    - libgmp3-dev
+    - libxslt1-dev
+    - libxml2-dev
+    - emacs23-nox
+    - emacs-goodies-el
+    - auto-complete-el
+    - rabbitmq-server
+    - pyflakes
+  tags: packages
+
+- name: Install Python Packages
+  pip: name={{ item }} state=latest
+  with_items:
+    - pyflakes
+
+- name: Install virtualenv
+  pip: name=virtualenv
+  tags: packages

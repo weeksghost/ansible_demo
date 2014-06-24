@@ -1,0 +1,19 @@
+---
+
+- name: Provision a {{ application_name }} server
+  hosts: hendrix
+  sudo: yes
+  sudo_user: root
+  vars:
+    - setup_git_repo: yes
+    - update_apt_cache: yes
+    - application_name: "{{ app_name }}"
+    - default_user: "{{ default_user }}"
+  vars_files:
+    - env_vars/base
+    - env_vars/local
+
+  roles:
+    - base
+    - db
+    - web
