@@ -1,7 +1,7 @@
 ---
 
 - name: Provision a {{ application_name }} server
-  hosts: hendrix
+  hosts: all
   sudo: yes
   sudo_user: root
   vars:
@@ -9,6 +9,7 @@
     - update_apt_cache: yes
     - application_name: "{{ app_name }}"
     - default_user: "{{ default_user }}"
+    - dotfiles_name: "{{ dotname }}"
   vars_files:
     - env_vars/base
     - env_vars/local

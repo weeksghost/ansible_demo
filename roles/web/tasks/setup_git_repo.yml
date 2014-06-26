@@ -1,18 +1,9 @@
 ---
 
-- name: Setup Dotfiles
+- name: Setup the Dotfiles repo
   git: repo={{ dot_files }}
-       dest=/home/{{ default_user }}
+       dest={{ dotname }}
+       accept_hostkey=yes
+  when: setup_git_repo
+  ignore_errors: yes
   tags: git
-
-#- name: Setup the Git repo
-#  git: repo={{ git_repo }}
-#       dest={{ project_path }}
-#       accept_hostkey=yes
-#  when: setup_git_repo
-#  tags: git
-
-
-
-
-
