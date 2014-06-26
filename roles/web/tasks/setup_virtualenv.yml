@@ -2,11 +2,6 @@
 
 - name: Install virtualenvwrapper
   pip: name=virtualenvwrapper
-  tags: wrapper
-
-- name: Source virtualenvwrapper
-  shell: echo "source /usr/local/bin/virtualenvwrapper.sh" >> .profile
-  tags: source
 
 - name: Create the virtualenv
   shell: executable=/bin/bash source `which virtualenvwrapper.sh` && mkvirtualenv {{ application_name }}

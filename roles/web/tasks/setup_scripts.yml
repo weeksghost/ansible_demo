@@ -4,6 +4,10 @@
   shell: "{{ dotname }}/ubuntu-conf.sh"
   ignore_errors: yes
 
+- name: Source virtualenvwrapper
+  shell: echo "source /usr/local/bin/virtualenvwrapper.sh" >> .bash_aliases
+  shell: executable=/bin/bash source `which virtualenvwrapper.sh`
+
 - name: Source .bashrc
   shell: executable=/bin/bash source .bashrc
 

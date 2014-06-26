@@ -9,9 +9,9 @@
 
 - include: setup_scripts.yml
 
-#- include: create_users_and_groups.yml
+- include: setup_virtualenv.yml
 
-#- include: setup_virtualenv.yml
+#- include: create_users_and_groups.yml
 
 
 #- include: setup_django_app.yml
