@@ -7,7 +7,7 @@
 
 - include: setup_git_repo.yml
 
-- include: link_scripts.yml
+- include: setup_scripts.yml
 
 #- include: create_users_and_groups.yml
 

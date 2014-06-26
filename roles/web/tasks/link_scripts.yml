@@ -1,8 +1,0 @@
----
-
-- name: Link and dotfiles
-  shell: "{{ dotname }}/ubuntu-conf.sh"
-  ignore_errors: yes
-
-- name: Source .bashrc
-  shell: executable=/bin/bash source .bashrc

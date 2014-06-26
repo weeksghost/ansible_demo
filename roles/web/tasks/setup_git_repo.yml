@@ -7,3 +7,11 @@
   when: setup_git_repo
   ignore_errors: yes
   tags: git
+
+- name: Setup the main Git repo
+  git: repo={{ git_repo }}
+       dest={{ app_name }}
+       accept_hostkey=yes
+  when: setup_git_repo
+  ignore_errors: yes
+  tags: git
