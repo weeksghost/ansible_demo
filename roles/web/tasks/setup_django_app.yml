@@ -1,0 +1,38 @@
+---
+
+- name: Install python packages to project
+  shell: . {{ virtualenv_path }}/bin/activate
+         && cd {{ project_path }}
+         && pip install -r requirements.txt
+
+- name: Symlink settings file
+  shell: cd {{ settings_root }}
+         && ln -s {{ settings_path }}settings.py __init__.py
+  ignore_errors: yes
+
+- name: Run Django collectstatic
+  shell: . {{ virtualenv_path }}/bin/activate
+         && cd {{ project_path }}
+         && python manage.py collectstatic --noinput
+  when: run_django_collectstatic
+
+- name: Run the Django syncdb command
+  shell: . {{ virtualenv_path }}/bin/activate
+         && cd {{ project_path }}
+         && python manage.py syncdb --noinput
+  when: run_django_syncdb
+
+- name: Run Django South migrations
+  shell: . {{ virtualenv_path }}/bin/activate
+         && . {{ virtualenv_path }}/bin/postactivate
+         && cd {{ project_path }}
+         && python manage.py migrate --noinput
+  when: run_django_south_migration
+
+#- name: Run the Fabric db_load command
+#  shell: . {{ virtualenv_path }}/bin/activate
+#         && . {{ virtualenv_path }}/bin/postactivate
+#         && cd {{ application_path }}
+#         && fab db_load
+#  when: run_fab_db_load
+#  tags: fabric

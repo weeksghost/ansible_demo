@@ -18,8 +18,6 @@
   sudo_user: root
   service: name=mysql state=started enabled=yes
 
-# TODO: Change root password and pair it with a variable
-
 - name: Ensure database is created
   mysql_db: db={{ db_name }}
             state=present
