@@ -14,4 +14,4 @@ Instructions
 
 3. Run the playbook using:
 
-    `ansible-playbook -i <HOST> -v development.yml --extra-vars "app_name=<APPNAME> default_user=<USERNAME> db_passwd=<PASSWORD>"`
+    `ansible-playbook -i <HOST> -v development.yml --extra-vars "app_name=<APPNAME> env=<EXAMPLE> default_user=<USERNAME> db_passwd=<PASSWORD>"`
