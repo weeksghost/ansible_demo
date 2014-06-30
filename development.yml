@@ -3,12 +3,13 @@
 - name: Provision a {{ application_name }} server
   hosts: all
   sudo: yes
-  sudo_user: root
+  sudo_user: "{{ default_user }}"
   vars:
     - setup_git_repo: yes
     - update_apt_cache: yes
+    - setup_scripts: yes
+    - db_password: "{{ db_passwd }}"
     - application_name: "{{ app_name }}"
-    - default_user: "{{ default_user }}"
     - dotfiles_name: "{{ dotname }}"
   vars_files:
     - env_vars/base

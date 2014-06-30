@@ -1,25 +1,31 @@
 ---
 
 - name: Install Nginx
+  sudo_user: root
   apt: name=nginx update_cache={{ update_apt_cache }} state=installed
   tags: packages
 
 - name: Enure that the Nginx service is stopped
+  sudo_user: root
   service: name=nginx state=stopped
 
 - name: Create the Nginx configuration file
+  sudo_user: root
   template: src=nginx_site_config.j2
             dest=/etc/nginx/sites-available/{{ application_name }}
             backup=yes
 
 - name: Ensure that the default site is disabled
+  sudo_user: root
   command: rm /etc/nginx/sites-enabled/default
            removes=/etc/nginx/sites-enabled/default
 
 - name: Ensure that the application site is enabled
+  sudo_user: root
   command: ln -s /etc/nginx/sites-available/{{ application_name }}
            /etc/nginx/sites-enabled/{{ application_name }}
            creates=/etc/nginx/sites-enabled/{{ application_name }}
 
 - name: Ensure Nginx service is started
+  sudo_user: root
   service: name=nginx state=started enabled=yes

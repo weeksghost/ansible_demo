@@ -5,7 +5,7 @@ virtualenv_path: "{{ application_name }}"
 project_path: "{{ application_name }}"
 application_path: "{{ application_name }}/{{ application_name }}"
 
-application_log_dir: "/var/log/nginx/"
+application_log_dir: "/var/log/nginx"
 application_log_file: "/var/log/supervisor/{{ application_name }}.log"
 application_err_file: "/var/log/supervisor/{{ application_name }}_err.log"
 

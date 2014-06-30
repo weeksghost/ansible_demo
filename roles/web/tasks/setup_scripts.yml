@@ -1,32 +1,48 @@
 ---
 
-- name: Link and dotfiles
-  shell: "{{ dotname }}/ubuntu-conf.sh"
+- name: Change permisson on dotfiles
+  file: path={{ dotname }}
+        state=directory
+        owner={{ default_user }}
+        group={{ default_user }}
+        recurse=yes
+  sudo_user: root
+  tags: perms
+
+- name: Link dotfiles
+  command: "{{ dotname }}/ubuntu-conf.sh"
+  when: setup_scripts
   ignore_errors: yes
 
-- name: Source virtualenvwrapper
-  shell: echo "source /usr/local/bin/virtualenvwrapper.sh" >> .bash_aliases
-  shell: executable=/bin/bash source `which virtualenvwrapper.sh`
+- name: Install Vundle
+  command: "{{ dotname }}/vundle-install.sh"
+  when: setup_scripts
+  ignore_errors: yes
+  tags: vun
 
 - name: Source .bashrc
   shell: executable=/bin/bash source .bashrc
 
 - name: Create static/media directories pt.1
+  sudo_user: root
   file: path=/var/www state=directory
         owner={{ default_user }}
         group={{ serving_group }}
 
 - name: Create static/media directories pt.2
+  sudo_user: root
   file: path=/var/www/assets state=directory
         owner={{ default_user }}
         group={{ serving_group }}
 
 - name: Create static/media directories pt.3
+  sudo_user: root
   file: path=/var/www/assets/static state=directory
         owner={{ default_user }}
         group={{ serving_group }}
 
 - name: Create static/media directories pt.4
+  sudo_user: root
   file: path=/var/www/assets/media state=directory
         owner={{ default_user }}
         group={{ serving_group }}

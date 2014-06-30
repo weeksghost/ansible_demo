@@ -1,6 +1,7 @@
 ---
 
 - name: Install MySQL
+  sudo_user: root
   apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
   with_items:
     - mysql-server
@@ -8,11 +9,13 @@
   tags: packages
 
 - name: Install MySQL Python Packages
+  sudo_user: root
   pip: name={{ item }} state=latest
   with_items:
     - MySQL-python
 
 - name: Ensure the MySQL service is running
+  sudo_user: root
   service: name=mysql state=started enabled=yes
 
 # TODO: Change root password and pair it with a variable
@@ -21,16 +24,16 @@
   mysql_db: db={{ db_name }}
             state=present
             login_user=root
-            login_password=
+            login_password=''
+  ignore_errors: yes
+  tags: mysql
 
 - name: Ensure user has access to the database
   mysql_user: name=root
               login_user=root
-              login_password=
-              host={{ item }}
-              password=
+              login_password={{ db_password }}
+              host=localhost
+              password={{ db_password }}
               priv=*.*:ALL,GRANT
               state=present
-  with_items:
-    - localhost
-    - 127.0.0.1
+  tags: mysql

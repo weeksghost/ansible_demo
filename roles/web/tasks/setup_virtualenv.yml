@@ -1,7 +1,12 @@
 ---
 
 - name: Install virtualenvwrapper
+  sudo_user: root
   pip: name=virtualenvwrapper
+
+- name: Source virtualenvwrapper
+  shell: echo "source /usr/local/bin/virtualenvwrapper.sh" >> .bash_aliases
+  shell: executable=/bin/bash source `which virtualenvwrapper.sh`
 
 - name: Create the virtualenv
   shell: executable=/bin/bash source `which virtualenvwrapper.sh` && mkvirtualenv {{ application_name }}
