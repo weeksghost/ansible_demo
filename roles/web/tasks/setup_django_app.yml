@@ -21,6 +21,7 @@
          && cd {{ project_path }}
          && python manage.py syncdb --noinput
   when: run_django_syncdb
+  tags: sync
 
 - name: Run Django South migrations
   shell: . {{ virtualenv_path }}/bin/activate
@@ -28,6 +29,7 @@
          && cd {{ project_path }}
          && python manage.py migrate --noinput
   when: run_django_south_migration
+  tags: migra
 
 #- name: Run the Fabric db_load command
 #  shell: . {{ virtualenv_path }}/bin/activate
