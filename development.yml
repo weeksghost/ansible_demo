@@ -15,6 +15,7 @@
     - application_name: "{{ app_name }}"
     - dotfiles_name: "{{ dotname }}"
     - environment: "{{ env }}"
+    - email_pass: "{{ mail_pass }}"
   vars_files:
     - env_vars/base
     - env_vars/local
@@ -23,3 +24,4 @@
     - base
     - db
     - web
+    - memcached

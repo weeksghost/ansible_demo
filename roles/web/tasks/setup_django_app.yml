@@ -5,6 +5,12 @@
          && cd {{ project_path }}
          && pip install -r requirements.txt
 
+- name: Create Django settings file
+  template: src=django_settings_config.j2
+            dest={{ settings_root }}/local/settings.py
+            backup=yes
+  tags: set
+
 - name: Symlink settings file
   shell: cd {{ settings_root }}
          && ln -s {{ settings_path }}settings.py __init__.py
