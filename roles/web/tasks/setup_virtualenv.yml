@@ -10,3 +10,4 @@
 
 - name: Create the virtualenv
   shell: executable=/bin/bash source `which virtualenvwrapper.sh` && mkvirtualenv {{ application_name }}
+  ignore_errors: yes

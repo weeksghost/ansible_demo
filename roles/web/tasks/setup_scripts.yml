@@ -1,13 +1,12 @@
 ---
 
 - name: Change permisson on dotfiles
+  sudo_user: root
   file: path={{ dotname }}
         state=directory
         owner={{ default_user }}
         group={{ default_user }}
         recurse=yes
-  sudo_user: root
-  tags: perms
 
 - name: Link dotfiles
   command: "{{ dotname }}/ubuntu-conf.sh"
@@ -18,7 +17,6 @@
   command: "{{ dotname }}/vundle-install.sh"
   when: setup_scripts
   ignore_errors: yes
-  tags: vun
 
 - name: Source .bashrc
   shell: executable=/bin/bash source .bashrc
@@ -46,3 +44,7 @@
   file: path=/var/www/assets/media state=directory
         owner={{ default_user }}
         group={{ serving_group }}
+
+- name: Compass compile
+  shell: cd {{ project_path }}/compass
+         && compass compile

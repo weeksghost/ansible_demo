@@ -11,3 +11,5 @@
 - include: setup_virtualenv.yml
 
 - include: setup_django_app.yml
+
+- include: setup_css_compile.yml
