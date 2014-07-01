@@ -45,6 +45,7 @@
     - emacs-goodies-el
     - auto-complete-el
     - rabbitmq-server
+    - pyflakes
   sudo_user: root
   tags: packages
 
@@ -52,7 +53,6 @@
   pip: name={{ item }} state=latest
   sudo_user: root
   with_items:
-    - python-memcached
     - pyflakes
 
 - name: Install Memcached
@@ -68,6 +68,11 @@
 - name: Install rubygems package
   sudo_user: root
   action: apt pkg=rubygems state=installed
+
+- name: Install sass
+  sudo_user: root
+  action: command gem install sass
+          creates=/usr/local/bin/sass
 
 - name: Install Compass
   sudo_user: root
