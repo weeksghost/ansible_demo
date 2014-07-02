@@ -25,3 +25,7 @@
   command: ln -s /etc/nginx/sites-available/{{ application_name }}
            /etc/nginx/sites-enabled/{{ application_name }}
            creates=/etc/nginx/sites-enabled/{{ application_name }}
+
+- name: restart nginx
+  sudo_user: root
+  service: name=nginx state=restarted enabled=yes
