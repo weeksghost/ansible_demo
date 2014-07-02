@@ -1,10 +1,13 @@
 ---
 
 - name: restart application
+  sudo_user: root
   supervisorctl: name={{ application_name }} state=restarted
 
 - name: restart nginx
+  sudo_user: root
   service: name=nginx state=restarted enabled=yes
 
 - name: reload nginx
+  sudo_user: root
   service: name=nginx state=reloaded
