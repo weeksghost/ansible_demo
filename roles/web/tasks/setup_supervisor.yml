@@ -13,3 +13,9 @@
 - name: Update Supervisor to add the app in the process group
   sudo_user: root
   command: supervisorctl update
+
+- name: restart supervisor
+  sudo_user: root
+  command: supervisorctl restart all
+
+
