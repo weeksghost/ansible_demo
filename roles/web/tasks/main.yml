@@ -1,5 +1,7 @@
 ---
 
+- include: setup_ec2.yml
+
 - include: setup_git_repo.yml
 
 - include: setup_virtualenv.yml

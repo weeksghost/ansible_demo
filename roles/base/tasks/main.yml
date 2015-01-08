@@ -46,6 +46,7 @@
     - auto-complete-el
     - rabbitmq-server
     - pyflakes
+    - ruby
   sudo_user: root
   tags: packages
 
