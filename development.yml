@@ -2,10 +2,6 @@
 
 - name: Provision a {{ application_name }} server
   hosts: all
-  connection: local
-  gather_facts: True
-  sudo: yes
-  sudo_user: "{{ default_user }}"
   vars:
     - setup_git_repo: yes
     - update_apt_cache: yes

@@ -1,23 +1,24 @@
 ---
 
 - name: Ubuntu apt-get update
+  sudo: yes
   apt: update_cache=yes
-  sudo_user: root
 
 - name: Ubuntu dist upgrade
+  sudo: yes
   apt: upgrade=dist
-  sudo_user: root
 
 - name: Ensure OpenSSl and libssl are the latest versions
+  sudo: yes
   apt: name={{ item }} update_cache={{ update_apt_cache }} state=latest
   with_items:
     - openssl
     - libssl-dev
     - libssl-doc
-  sudo_user: root
   tags: packages
 
 - name: Install base packages
+  sudo: yes
   apt: name={{ item }} update_cache={{ update_apt_cache }} force=yes state=installed
   with_items:
     - build-essential
@@ -47,35 +48,34 @@
     - rabbitmq-server
     - pyflakes
     - ruby
-  sudo_user: root
   tags: packages
 
 - name: Install Python Packages
+  sudo: yes
   pip: name={{ item }} state=latest
-  sudo_user: root
   with_items:
     - pyflakes
 
 - name: Install Memcached
-  sudo_user: root
+  sudo: yes
   apt: name=memcached update_cache={{ update_apt_cache }} state=installed
   tags: packages
 
 - name: Install virtualenv
+  sudo: yes
   pip: name=virtualenv
-  sudo_user: root
   tags: packages
 
 - name: Install rubygems package
-  sudo_user: root
+  sudo: yes
   action: apt pkg=rubygems state=installed
 
 - name: Install sass
-  sudo_user: root
+  sudo: yes
   action: command gem install sass
           creates=/usr/local/bin/sass
 
 - name: Install Compass
-  sudo_user: root
+  sudo: yes
   action: command gem install compass
           creates=/usr/local/bin/compass
