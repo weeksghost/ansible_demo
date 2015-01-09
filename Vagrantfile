@@ -4,8 +4,49 @@
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  config.vm.box = "precise64"
-  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
+
+  config.vm.define :bdelta do |x|
+
+    x.vm.box = "ubuntu/trusty64"
+    x.vm.hostname = "brooklyndelta.com"
+    x.vm.boot_timeout = 120
+  end
+
+  config.vm.provider :aws do |aws, override|
+
+    aws.access_key_id = ENV['AWS_KEY']
+    aws.secret_access_key = ENV['AWS_SECRET']
+    aws.keypair_name = ENV['AWS_KEYNAME']
+    aws.ami = "ami-4ceaed4d"
+    aws.instance_type = "t1.micro"
+    aws.security_groups = ENV['AWS_SECURITY_GROUP']
+
+    override.vm.box = "dummy"
+    override.ssh.username = "ubuntu"
+    override.ssh.private_key_path = ENV['AWS_KEYPATH']
+
+  end
+
+  config.vm.provision "ansible" do |ansible|
+
+    ansible.extra_vars = {
+
+      app_name: "djangoproject",
+      dotname: "dotfiles",
+      settings_dir: ENV['USER'],
+      default_user: ENV['USER'],
+      password: "",
+      db_passwd: "",
+
+      }
+
+    ansible.playbook = "development.yml"
+    ansible.verbose = "vvvv"
+
+  end
+
+#  config.vm.box = "precise64"
+#  config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
   #config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "vagrant"
 
@@ -56,7 +97,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #    settings_dir: ENV['USER'],
   #    default_user: ENV['USER'],
   #    password: "",
-  #    db_passwd: "Fukst1k",
+  #    db_passwd: "",
 
   #    }
 
@@ -65,43 +106,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   #end
 
-Vagrant.configure("2") do |config|
 
-  config.vm.box = "aws-precise-32"
-  config.vm.hostname = "brooklyndelta.com"
-  config.vm.boot_timeout = 120
-
-  end
-
-  config.vm.provider :aws do |aws, override|
-
-    aws.access_key_id = "AKIAICXCV3KLYXQDSO2Q"
-    aws.secret_access_key = "1SVe8sOBu0rJnSI/svWbtWWgRh+cPqhkfCdTk2x"
-    aws.ami = "ami-4ceaed4d"
-    aws.keypair_name = "bdelta"
-    aws.security_groups = ["default", "sg-0033e065"]
-    override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "~/.keys/bdelta.pem"
-
-  end
-
-  config.vm.provision "ansible" do |ansible|
-
-    ansible.extra_vars = {
-
-      app_name: "djangoproject",
-      dotname: "dotfiles",
-      settings_dir: ENV['USER'],
-      default_user: ENV['USER'],
-      password: "",
-      db_passwd: "Fukst1k",
-
-      }
-
-    ansible.playbook = "development.yml"
-    ansible.verbose = "vvvv"
-
-  end
 
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
