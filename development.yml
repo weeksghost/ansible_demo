@@ -17,14 +17,6 @@
     - application_name: "{{ app_name }}"
     - dotfiles_name: "{{ dotname }}"
     - environment: "{{ env }}"
-    - email_pass: "{{ mail_pass }}"
-    - instance_type: t1.micro
-    - security_group: "{{ security_group }}"
-    - image: ami-4ceaed4d
-    - region: us-east-1
-    - keypair: "{{ keypair }}"
-    - vpc_subnet_id: "{{ vpc }}"
-    - assign_public_ip: yes
 
   vars_files:
     - env_vars/base

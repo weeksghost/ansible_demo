@@ -54,3 +54,6 @@ docs/_build/
 
 # Mac Stuff
 .DS_Store
+
+# Vagrant
+.vagrant
