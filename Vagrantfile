@@ -67,7 +67,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
 Vagrant.configure("2") do |config|
 
-  #config.vm.provision :ansible, :playbook => 'development.yml'
+  config.vm.box = "aws-precise-32"
+  config.vm.hostname = "brooklyndelta.com"
+  config.vm.boot_timeout = 120
+
   end
 
   config.vm.provider :aws do |aws, override|
@@ -77,23 +80,26 @@ Vagrant.configure("2") do |config|
     aws.ami = "ami-4ceaed4d"
     aws.keypair_name = "bdelta"
     aws.security_groups = ["default", "sg-0033e065"]
-
     override.ssh.username = "ubuntu"
     override.ssh.private_key_path = "~/.keys/bdelta.pem"
 
-    #ansible.extra_vars = {
+  end
 
-    #  app_name: "djangoproject",
-    #  dotname: "dotfiles",
-    #  settings_dir: ENV['USER'],
-    #  default_user: ENV['USER'],
-    #  password: "",
-    #  db_passwd: "Fukst1k",
+  config.vm.provision "ansible" do |ansible|
 
-    #  }
+    ansible.extra_vars = {
 
-    ##ansible.playbook = "development.yml"
-    #ansible.verbose = "vvvv"
+      app_name: "djangoproject",
+      dotname: "dotfiles",
+      settings_dir: ENV['USER'],
+      default_user: ENV['USER'],
+      password: "",
+      db_passwd: "Fukst1k",
+
+      }
+
+    ansible.playbook = "development.yml"
+    ansible.verbose = "vvvv"
 
   end
 
