@@ -1,7 +1,7 @@
 ---
 
 - name: Create the Memcached configuration file
-  sudo_user: root
+  sudo: yes
   template: src=memcached.conf.j2
             dest=/etc/memcached.conf
             mode=0644
@@ -10,5 +10,5 @@
     - restart memcached
 
 - name: Ensure the Memcached service is running
-  sudo_user: root
+  sudo: yes
   service: name=memcached state=started enabled=yes

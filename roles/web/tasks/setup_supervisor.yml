@@ -1,21 +1,21 @@
 ---
 
 - name: Create the Supervisor config file
-  sudo_user: root
+  sudo: yes
   template: src=supervisor_config.j2
             dest=/etc/supervisor/conf.d/{{ application_name }}.conf
             backup=yes
 
 - name: Re-read the Supervisor config files
-  sudo_user: root
+  sudo: yes
   command: supervisorctl reread
 
 - name: Update Supervisor to add the app in the process group
-  sudo_user: root
+  sudo: yes
   command: supervisorctl update
 
 - name: restart supervisor
-  sudo_user: root
+  sudo: yes
   command: supervisorctl restart all
 
 

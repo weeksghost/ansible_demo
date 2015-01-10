@@ -1,0 +1,24 @@
+---
+
+- name: Create RabbitMQ vhost
+  sudo: yes
+  command: rabbitmqctl add_vhost {{ application_name }}
+  ignore_errors: yes
+
+- name: Create RabbitMQ user
+  sudo: yes
+  rabbitmq_user: user={{ application_name }}
+                 password={{ application_name }}
+                 vhost={{ application_name }}
+                 configure_priv=.*
+                 read_priv=.*
+                 write_priv=.*
+                 state=present
+  ignore_errors: yes
+
+- name: remove guest user
+  sudo: yes
+  rabbitmq_user: user=guest
+                 vhost=/
+                 state=absent
+  ignore_errors: yes

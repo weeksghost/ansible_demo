@@ -1,7 +1,7 @@
 ---
 
 - name: Change permisson on dotfiles
-  sudo_user: root
+  sudo: yes
   file: path={{ dotname }}
         state=directory
         owner={{ default_user }}
@@ -22,25 +22,25 @@
   shell: executable=/bin/bash source .bashrc
 
 - name: Create static/media directories pt.1
-  sudo_user: root
+  sudo: yes
   file: path=/var/www state=directory
         owner={{ default_user }}
         group={{ serving_group }}
 
 - name: Create static/media directories pt.2
-  sudo_user: root
+  sudo: yes
   file: path=/var/www/assets state=directory
         owner={{ default_user }}
         group={{ serving_group }}
 
 - name: Create static/media directories pt.3
-  sudo_user: root
+  sudo: yes
   file: path=/var/www/assets/static state=directory
         owner={{ default_user }}
         group={{ serving_group }}
 
 - name: Create static/media directories pt.4
-  sudo_user: root
+  sudo: yes
   file: path=/var/www/assets/media state=directory
         owner={{ default_user }}
         group={{ serving_group }}

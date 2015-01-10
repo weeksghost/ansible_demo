@@ -1,7 +1,7 @@
 ---
 
 - name: Install virtualenvwrapper
-  sudo_user: root
+  sudo: yes
   pip: name=virtualenvwrapper
 
 - name: Source virtualenvwrapper

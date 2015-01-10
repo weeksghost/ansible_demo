@@ -12,7 +12,8 @@
     - db_password: "{{ db_passwd }}"
     - application_name: "{{ app_name }}"
     - dotfiles_name: "{{ dotname }}"
-    - environment: "{{ env }}"
+    - settings: "{{ settings_dir }}"
+    - localuser: "{{ lookup('ENV','USER') }}"
 
   vars_files:
     - env_vars/base

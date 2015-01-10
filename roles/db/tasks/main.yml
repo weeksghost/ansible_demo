@@ -1,7 +1,7 @@
 ---
 
 - name: Install MySQL
-  sudo_user: root
+  sudo: yes
   apt: name={{ item }} update_cache={{ update_apt_cache }} state=installed
   with_items:
     - mysql-server
@@ -9,13 +9,13 @@
   tags: packages
 
 - name: Install MySQL Python Packages
-  sudo_user: root
+  sudo: yes
   pip: name={{ item }} state=latest
   with_items:
     - MySQL-python
 
 - name: Ensure the MySQL service is running
-  sudo_user: root
+  sudo: yes
   service: name=mysql state=started enabled=yes
 
 - name: Ensure database is created
