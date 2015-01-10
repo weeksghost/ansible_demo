@@ -7,14 +7,17 @@
 
 - name: Create Django settings file
   template: src=django_settings_config.j2
-            dest={{ settings_root }}/local/settings.py
+            dest={{ settings_root }}/{{ settings_dir }}/settings.py
             backup=yes
-  tags: set
 
 - name: Symlink settings file
   shell: cd {{ settings_root }}
          && ln -s {{ settings_path }}settings.py __init__.py
   ignore_errors: yes
+
+- name: Compile CSS
+  shell: cd {{ project_path }}/compass
+         && sass --update --force sass:../static/css --sourcemap=none
 
 - name: Run Django collectstatic
   shell: . {{ virtualenv_path }}/bin/activate
