@@ -41,7 +41,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       app_name: "djangoproject",
       dotname: "dotfiles",
       settings_dir: "prod",
-      default_user: "bdelta",
+      default_user: "ubuntu",
       password: "",
       db_passwd: ENV['DB_PASS'],
 

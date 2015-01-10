@@ -44,7 +44,3 @@
   file: path=/var/www/assets/media state=directory
         owner={{ default_user }}
         group={{ serving_group }}
-
-- name: Compass compile
-  shell: cd {{ project_path }}/compass
-         && compass compile
