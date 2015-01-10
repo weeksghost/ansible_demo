@@ -17,9 +17,9 @@ smtp_password: "{{ email_pass }}"
 
 # Application settings.
 admin_name: "{{ default_user }}"
-environment: "{{ env }}"
 django_secret_key: akr2icmg1n8%z^3fe3c+)5d0(t^cy-2_25rrl35a7@!scna^1#
-#
+#environment: "{{ env }}"
+
 run_django_collectstatic: yes
 run_django_syncdb: yes
 run_django_south_migration: yes

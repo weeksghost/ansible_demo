@@ -35,7 +35,7 @@
          && python manage.py migrate --noinput
   when: run_django_south_migration
 
-#- name: Run the Fabric db_load command
+#- name: Run the Fab db_load command
 #  shell: . {{ virtualenv_path }}/bin/activate
 #         && . {{ virtualenv_path }}/bin/postactivate
 #         && cd {{ application_path }}

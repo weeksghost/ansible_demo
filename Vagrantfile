@@ -33,19 +33,19 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-
   config.vm.provision "ansible" do |ansible|
 
     ansible.extra_vars = {
 
       app_name: "djangoproject",
       dotname: "dotfiles",
-      settings_dir: "prod",
+      settings_dir: "example",
       default_user: "ubuntu",
       password: "",
       db_passwd: ENV['DB_PASS'],
+      mail_pass: ENV['MAIL_PASS']
 
-      }
+    }
 
     ansible.playbook = "development.yml"
     ansible.verbose = "vvvv"
