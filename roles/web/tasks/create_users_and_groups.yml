@@ -9,30 +9,3 @@
     append=true
     group=admin
     comment={{ localuser }}
-
-#- name: Move rsa.pub to SSH dir
-#  shell: cat vagrant >> .ssh/authorized_keys
-#
-#- name: ensure ssh directory exists for {{ default_user }}
-#  file: dest=/home/{{ default_user }}/.ssh
-#        owner={{ default_user }}
-#        group=staff
-#        state=directory
-#
-#- name: Copy public key
-#  shell: mv vagrant .ssh/authorized_keys
-#
-#- name: Change permissons on ssh
-#  command: chmod 700 .ssh
-#
-#- name: Change permissons on ssh keys
-#  command: chmod 600 .ssh
-
-#- name: Create the application user
-#  user: name={{ gunicorn_user }} state=present
-#
-#- name: Create the application group
-#  group: name={{ gunicorn_group }} system=yes state=present
-#
-#- name: Add the application user to the application group
-#  user: name={{ gunicorn_user }} group={{ gunicorn_group }} state=present
