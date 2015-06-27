@@ -17,22 +17,3 @@
 - name: Ensure the MySQL service is running
   sudo: yes
   service: name=mysql state=started enabled=yes
-
-- name: Ensure database is created
-  mysql_db: db={{ db_name }}
-            state=present
-            login_user=root
-            login_password=''
-  ignore_errors: yes
-  tags: mysql
-
-- name: Ensure user has access to the database
-  mysql_user: name=root
-              login_user=root
-              login_password=''
-              host=localhost
-              password={{ db_password }}
-              priv=*.*:ALL,GRANT
-              state=present
-  ignore_errors: yes
-  tags: mysql

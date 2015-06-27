@@ -6,15 +6,9 @@
     - setup_git_repo: yes
     - update_apt_cache: yes
     - setup_scripts: yes
-    - run_django_syncdb: yes
-    - run_django_south_migration: yes
-    - run_django_collectstatic: yes
-    - db_password: "{{ db_passwd }}"
     - application_name: "{{ app_name }}"
     - dotfiles_name: "{{ dotname }}"
-    - settings: "{{ settings_dir }}"
     - localuser: "{{ lookup('ENV','USER') }}"
-    - email_pass: "{{ mail_pass }}"
 
   vars_files:
     - env_vars/base

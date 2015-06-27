@@ -1,5 +1,0 @@
-[program:celeryd]
-command =/home/{{ default_user }}/.virtualenvs/{{ application_name }}/bin/python /home/{{ default_user }}/{{ application_name }}/manage.py celeryd -E -B
-user = {{ application_name }}
-stdout_logfile = /var/log/supervisor/celeryd.log
-stderr_logfile = /var/log/supervisor/celeryd_err.log

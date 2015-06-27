@@ -22,6 +22,7 @@
   apt: name={{ item }} update_cache={{ update_apt_cache }} force=yes state=installed
   with_items:
     - build-essential
+    - xvfb
     - git
     - ntp
     - sqlite3
@@ -65,8 +66,3 @@
   sudo: yes
   pip: name=virtualenv
   tags: packages
-
-- name: Install sass
-  sudo: yes
-  action: command gem install sass
-          creates=/usr/local/bin/sass
