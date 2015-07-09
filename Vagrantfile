@@ -5,6 +5,8 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
+  config.vm.network "public_network", bridge: 'en1: Wi-Fi (Airport)'
+
   config.vm.define :vagrant do |x|
     x.vm.box = "ubuntu/trusty64"
     x.vm.hostname = "myvagrant"
