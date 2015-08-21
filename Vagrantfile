@@ -14,6 +14,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     x.vm.provider :virtualbox do |v|
       v.name = "myvagrant"
+      v.memory = 2048
+      v.cpus = 2
     end
   end
 
