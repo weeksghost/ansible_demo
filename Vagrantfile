@@ -5,13 +5,13 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-  config.vm.define :vagrant do |x|
+  config.vm.define :ec2 do |x|
     x.vm.box = "ubuntu/trusty64"
-    x.vm.hostname = "myvagrant"
+    x.vm.hostname = "grid"
     x.vm.boot_timeout = 120
 
     x.vm.provider :virtualbox do |v|
-      v.name = "myvagrant"
+      v.name = "grid"
     end
 
     x.vm.provider :aws do |aws, override|
@@ -19,15 +19,15 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       aws.secret_access_key = ENV['AWS_SECRET']
       aws.keypair_name = ENV['AWS_KEYNAME']
       aws.security_groups = ENV['AWS_SECURITY_GROUP']
-      aws.ami = "ami-64e27e0c"
+      aws.ami = "ami-bb156ad1"
       aws.region = "us-east-1"
-      aws.instance_type = "t1.micro"
+      aws.instance_type = "t2.micro"
 
       aws.tags = {
-        'Name' => 'Vagrant'
+        'Name' => 'grid'
       }
 
-      override.vm.box = "dummy"
+      override.vm.box = "dummy.box"
       override.ssh.username = "ubuntu"
       override.ssh.private_key_path = ENV['AWS_KEYPATH']
     end
