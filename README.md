@@ -30,8 +30,8 @@ Instructions:
 **For example:**
 
 ```
-echo "[default]\n\
-aws_access_key_id = XXXXXXXXXXXXXXX\n\
+echo "[default] \
+aws_access_key_id = XXXXXXXXXXXXXXX \
 aws_secret_access_key = XXXXXXXXXXXXXXX" \
 >  ~/.aws/credentials
 ```
@@ -50,13 +50,15 @@ Up and running:
 
 2) brew install ansible
 
-3) Install or update [VirtualBox](http://download.virtualbox.org/virtualbox/4.3.26/VirtualBox-4.3.26-98988-OSX.dmg), [VirtualBox Extension Pack](http://download.virtualbox.org/virtualbox/4.2.28/Oracle_VM_VirtualBox_Extension_Pack-4.2.28-97679.vbox-extpack) & [Vagrant](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.2.dmg)
+3) Install or update [VirtualBox](http://download.virtualbox.org/virtualbox/4.3.26/VirtualBox-4.3.26-98988-OSX.dmg), [VirtualBox Extension Pack](http://download.virtualbox.org/virtualbox/4.2.28/Oracle_VM_VirtualBox_Extension_Pack-4.2.28-97679.vbox-extpack) & [Vagrant](https://releases.hashicorp.com/vagrant/1.7.4/vagrant_1.7.4.dmg)
 
-4) Download the git repo: git@github.com:weeksghost/ansible_demo.git
+4) Install aws Vagrant plugin `vagrant plugin install vagrant-aws`
 
-5) Checkout branch "aws-vagrant-basic"
+5) Download the git repo: git@github.com:weeksghost/ansible_demo.git
 
-6) Run `Vagrant up --provider=aws`
+6) Checkout branch "aws-vagrant-basic"
+
+7) Run `Vagrant up --provider=aws`
 
 
 ### WARNING
