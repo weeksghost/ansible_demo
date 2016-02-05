@@ -7,5 +7,3 @@
 - include: setup_virtualenv.yml
 
 - include: setup_scripts.yml
-
-- include: setup_nginx.yml

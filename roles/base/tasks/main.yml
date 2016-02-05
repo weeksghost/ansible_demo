@@ -1,15 +1,11 @@
 ---
 
 - name: Ubuntu apt-get update
-  sudo: yes
+  become: yes
   apt: update_cache=yes
 
-- name: Ubuntu dist upgrade
-  sudo: yes
-  apt: upgrade=dist
-
 - name: Ensure OpenSSl and libssl are the latest versions
-  sudo: yes
+  become: yes
   apt: name={{ item }} update_cache={{ update_apt_cache }} state=latest
   with_items:
     - openssl
@@ -18,11 +14,17 @@
   tags: packages
 
 - name: Install base packages
-  sudo: yes
+  become: yes
   apt: name={{ item }} update_cache={{ update_apt_cache }} force=yes state=installed
   with_items:
     - build-essential
     - xvfb
+    - x11-xkb-utils
+    - xfonts-100dpi
+    - xfonts-75dpi
+    - xfonts-scalable
+    - xfonts-cyrillic
+    - x11-apps
     - git
     - ntp
     - sqlite3
@@ -30,7 +32,6 @@
     - python-dev
     - python-pip
     - python-pycurl
-    - supervisor
     - libfreetype6-dev
     - libjpeg8-dev
     - liblcms1-dev
@@ -46,23 +47,10 @@
     - emacs23-nox
     - emacs-goodies-el
     - auto-complete-el
-    - rabbitmq-server
-    - pyflakes
     - ruby
   tags: packages
 
-- name: Install Python Packages
-  sudo: yes
-  pip: name={{ item }} state=latest
-  with_items:
-    - pyflakes
-
-- name: Install Memcached
-  sudo: yes
-  apt: name=memcached update_cache={{ update_apt_cache }} state=installed
-  tags: packages
-
 - name: Install virtualenv
-  sudo: yes
+  become: yes
   pip: name=virtualenv
   tags: packages

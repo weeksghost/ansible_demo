@@ -1,7 +1,7 @@
 ---
 
 - name: Change permisson on dotfiles
-  sudo: yes
+  become: yes
   file: path={{ dotname }}
         state=directory
         owner={{ default_user }}
@@ -20,3 +20,52 @@
 
 - name: Source .bashrc
   shell: executable=/bin/bash source .bashrc
+
+- name: Copy Xvfb init
+  become: yes
+  copy: src=roles/web/files/
+        dest=/etc/init.d
+        owner=root
+        group=root
+        mode=770
+
+- name: Add Xvfb service
+  become: yes
+  command: update-rc.d xvfb defaults
+
+- name: Start Xvfb
+  become: yes
+  service: name=xvfb state=started
+
+- name: Does the Google apt file exist?
+  command: test -f "{{ apt_file }}"
+  register: google_apt_exists
+  ignore_errors: True
+
+- name: Add Google Chrome key
+  become: yes
+  shell: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+  when: google_apt_exists.rc == 1
+
+- name: Add Google Chrome repo
+  become: yes
+  copy: content="deb http://dl.google.com/linux/chrome/deb/ stable main" dest={{apt_file}} owner=root group=root mode=644
+  when: google_apt_exists.rc == 1
+
+- name: Update apt cache
+  become: yes
+  apt: update_cache=yes
+  when: google_apt_exists.rc == 1
+
+- name: Install Google Chrome Browser
+  become: yes
+  apt: pkg=google-chrome-stable state=installed
+
+- name: Install Google Chrome Driver
+  become: yes
+  unarchive: src=http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip
+             dest=/usr/local/bin
+             copy=no
+             owner={{ default_user }}
+             group={{ default_user }}
+             mode=770
