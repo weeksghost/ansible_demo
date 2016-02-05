@@ -16,6 +16,4 @@
 
   roles:
     - base
-    - db
     - web
-    - memcached
