@@ -16,6 +16,6 @@
   copy: src=roles/web/files/requirements.txt
         dest=/home/{{ default_user }}
 
-- name: Install python requirements to virtualenv
+- name: Install Selenium
   become: yes
-  pip: requirements=/home/{{ default_user }}/requirements.txt virtualenv={{ application_name }}
+  pip: name=selenium
