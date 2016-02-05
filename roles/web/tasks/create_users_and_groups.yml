@@ -1,7 +1,7 @@
 ---
 
 - name: Create user account
-  sudo: yes
+  become: yes
   user:
     name={{ localuser }}
     home=/home/{{ localuser }}

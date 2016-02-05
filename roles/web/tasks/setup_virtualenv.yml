@@ -1,7 +1,7 @@
 ---
 
 - name: Install virtualenvwrapper
-  sudo: yes
+  become: yes
   pip: name=virtualenvwrapper
 
 - name: Source virtualenvwrapper
@@ -11,3 +11,11 @@
 - name: Create the virtualenv
   shell: executable=/bin/bash source `which virtualenvwrapper.sh` && mkvirtualenv {{ application_name }}
   ignore_errors: yes
+
+- name: Copy pip requirements file
+  copy: src=roles/web/files/requirements.txt
+        dest=/home/{{ default_user }}
+
+- name: Install python requirements to virtualenv
+  become: yes
+  pip: requirements=/home/{{ default_user }}/requirements.txt virtualenv={{ application_name }}

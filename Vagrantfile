@@ -17,7 +17,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       virtualbox.name = "loadtest"
       virtualbox.memory = 2048
       virtualbox.cpus = 2
-      virtualbox.gui = true
     end
   end
 
@@ -28,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       app_name: "loadtest",
       dotname: "dotfiles",
       settings_dir: "local",
-      default_user: "ubuntu",
+      default_user: "vagrant",
       password: "",
     }
 

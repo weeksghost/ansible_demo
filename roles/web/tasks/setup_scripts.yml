@@ -64,8 +64,8 @@
 - name: Install Google Chrome Driver
   become: yes
   unarchive: src=http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip
-             dest=/usr/local/bin
+             dest=/usr/bin
              copy=no
              owner={{ default_user }}
              group={{ default_user }}
-             mode=770
+             mode=755
