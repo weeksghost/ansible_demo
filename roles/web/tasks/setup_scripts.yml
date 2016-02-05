@@ -69,3 +69,13 @@
              owner={{ default_user }}
              group={{ default_user }}
              mode=755
+
+- name: Copy selenium script
+  copy: src=roles/web/files/test.py
+        dest=/home/{{ default_user }}
+
+- name: Source bashrc
+  shell: executable=/bin/bash source ~/.bash_aliases
+
+- name: Run selenium script
+  command: 'python /home/{{ default_user }}/test.py'

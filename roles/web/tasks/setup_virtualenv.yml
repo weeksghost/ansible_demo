@@ -12,10 +12,6 @@
   shell: executable=/bin/bash source `which virtualenvwrapper.sh` && mkvirtualenv {{ application_name }}
   ignore_errors: yes
 
-- name: Copy pip requirements file
-  copy: src=roles/web/files/requirements.txt
-        dest=/home/{{ default_user }}
-
 - name: Install Selenium
   become: yes
   pip: name=selenium
