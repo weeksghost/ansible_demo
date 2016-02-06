@@ -32,7 +32,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     }
 
     ansible.playbook = "development.yml"
-    ansible.verbose = "vvvv"
+    #ansible.verbose = "vvvv"
   end
 end
 

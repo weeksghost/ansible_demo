@@ -217,13 +217,4 @@ class Page(object):
                 return catfile.readlines()
 
     def take_screenshot(self, name):
-        screenir_dir = '/var/www/selenium/screenshots/'
-        local_path = os.getcwd() + '/utils/screenshots/'
-
-        if not os.path.exists(os.path.dirname(screenir_dir)):
-            try:
-                os.mkdir(local_path)
-                self.selenium.save_screenshot(local_path + '{name}.png'.format(name=name))
-            except:
-                self.selenium.save_screenshot(local_path + '{name}.png'.format(name=name))
-        self.selenium.save_screenshot(screenir_dir + '{name}.png'.format(name=name))
+        self.selenium.save_screenshot('{name}.png'.format(name=name))
