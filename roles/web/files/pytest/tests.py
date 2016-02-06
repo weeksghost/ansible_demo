@@ -1,4 +1,3 @@
-import os
 import pytest
 import requests
 requests.packages.urllib3.disable_warnings()
@@ -6,11 +5,9 @@ requests.packages.urllib3.disable_warnings()
 from pages.page import Page
 
 nondestructive = pytest.mark.nondestructive
-skip_selenium = pytest.mark.skip_selenium
 
 
 @nondestructive
-@skip_selenium
 class Test(object):
 
     @pytest.mark.stat
