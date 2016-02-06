@@ -81,10 +81,6 @@
   become: yes
   pip: requirements=/home/{{ default_user }}/requirements.txt
 
-- name: Copy Webdirver script
-  copy: src=roles/web/files/tests.py
-        dest=/home/{{ default_user }}
-
 - name: Copy test runner script
   copy: src=roles/web/files/test.sh
         dest=/home/{{ default_user }}
