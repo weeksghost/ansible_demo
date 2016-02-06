@@ -4,14 +4,12 @@
   become: yes
   pip: name=virtualenvwrapper
 
-- name: Source virtualenvwrapper
+- name: Add virtualenvwrapper to PATH
   shell: echo "source /usr/local/bin/virtualenvwrapper.sh" >> .bash_aliases
+
+- name: Source virtualenvwrapper
   shell: executable=/bin/bash source `which virtualenvwrapper.sh`
 
 - name: Create the virtualenv
   shell: executable=/bin/bash source `which virtualenvwrapper.sh` && mkvirtualenv {{ application_name }}
   ignore_errors: yes
-
-- name: Install Selenium
-  become: yes
-  pip: name=selenium

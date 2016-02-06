@@ -70,12 +70,24 @@
              group={{ default_user }}
              mode=755
 
-- name: Copy selenium script
-  copy: src=roles/web/files/test.py
+- name: Copy main test folder
+  unarchive: src=roles/web/files/pytest.zip dest=/home/{{ default_user }}
+
+- name: Copy requirements file
+  copy: src=roles/web/files/requirements.txt
         dest=/home/{{ default_user }}
 
-- name: Source bashrc
-  shell: executable=/bin/bash source ~/.bash_aliases
+- name: Install python packages
+  become: yes
+  pip: requirements=/home/{{ default_user }}/requirements.txt
+
+- name: Copy Webdirver script
+  copy: src=roles/web/files/tests.py
+        dest=/home/{{ default_user }}
+
+- name: Copy test runner script
+  copy: src=roles/web/files/test.sh
+        dest=/home/{{ default_user }}
 
 - name: Run selenium script
-  command: 'python /home/{{ default_user }}/test.py'
+  command: sh /home/{{ default_user }}/test.sh
