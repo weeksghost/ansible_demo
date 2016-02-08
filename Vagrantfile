@@ -6,9 +6,9 @@ BOX_TIMEOUT = 180
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
-    N = 2
+    N = 20
     (1..N).each do |machine_id|
-      config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
+      #config.vm.network "public_network", bridge: "en0: Wi-Fi (AirPort)"
       config.vm.define "machine_id#{machine_id}" do |local|
         local.vm.define "machine_id1", primary: true
         local.vm.box = "ubuntu/trusty64"
