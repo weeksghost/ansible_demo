@@ -4,6 +4,7 @@
 
 - include: setup_git_repo.yml
 
-- include: setup_virtualenv.yml
-
 - include: setup_scripts.yml
+
+#- include: setup_virtualenv.yml
+

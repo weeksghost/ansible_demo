@@ -1,8 +1,8 @@
 ---
 
-- name: Ubuntu apt-get update
-  become: yes
-  apt: update_cache=yes
+#- name: Ubuntu apt-get update
+#  become: yes
+#  apt: update_cache=yes
 
 - name: Ensure OpenSSl and libssl are the latest versions
   become: yes
@@ -31,26 +31,20 @@
     - unzip
     - python-dev
     - python-pip
-    - python-pycurl
     - libfreetype6-dev
     - libjpeg8-dev
     - liblcms1-dev
     - libpng12-dev
     - zlib1g-dev
-    - libmemcached-dev
     - libsqlite3-dev
     - libev-dev
     - libevent-dev
     - libgmp3-dev
     - libxslt1-dev
     - libxml2-dev
-    - emacs23-nox
-    - emacs-goodies-el
-    - auto-complete-el
-    - ruby
   tags: packages
 
-- name: Install virtualenv
-  become: yes
-  pip: name=virtualenv
-  tags: packages
+#- name: Install virtualenv
+#  become: yes
+#  pip: name=virtualenv
+#  tags: packages
